@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/Metalblader/react-native-xendit-payment",
-  "author": "Ritchie Goldwin <ritchie.goldwin00@gmail.com> (https://github.com/Metalblader)",
+  "repository": "https://github.com/springkraf/react-native-xendit-payment",
+  "author": "Ritchie Goldwin <ritchie.goldwin00@gmail.com> (https://github.com/springkraf)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Metalblader/react-native-xendit-payment/issues"
+    "url": "https://github.com/springkraf/react-native-xendit-payment/issues"
   },
-  "homepage": "https://github.com/Metalblader/react-native-xendit-payment#readme",
+  "homepage": "https://github.com/springkraf/react-native-xendit-payment#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

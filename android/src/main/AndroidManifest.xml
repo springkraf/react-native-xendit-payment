@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.reactnativexenditpayment">
-
+          package="com.reactnativexenditpayment"
+          xmlns:tools="http://schemas.android.com/tools"
+          >
+    <application
+        tools:replace="android:allowBackup"
+        android:allowBackup="true">
+        <activity android:name="com.xendit.XenditActivity"/>
+    </application>
 </manifest>

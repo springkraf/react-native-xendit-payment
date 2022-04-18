@@ -8,3 +8,9 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+
+# xendit
+-keep public class com.xendit.** { public *;}
+-keep class com.xendit.Models.** { *; }
+-keepattributes *Annotation*
+-keepattributes LocalVariableTable,LocalVariableTypeTable
