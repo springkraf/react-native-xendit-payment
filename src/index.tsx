@@ -17,11 +17,44 @@ const XenditPayment = NativeModules.XenditPayment
       }
     );
 
+export interface CardMetadata {
+  bank: string;
+  country: string;
+  type: string;
+  brand: string;
+  cardArtUrl: string;
+  fingerprint: string;
+}
+
 export interface Card {
   creditCardNumber: string;
   cardExpirationMonth: string;
   cardExpirationYear: string;
   creditCardCVN: string;
+}
+
+export interface Token {
+  id: string;
+  status: string;
+  authenticationId: string;
+  authenticationURL?: string;
+  maskedCardNumber: string;
+  should3DS: boolean;
+  cardInfo: CardMetadata;
+  failureReason?: string;
+}
+
+export interface Authentication {
+  id: string;
+  status: string;
+  tokenId?: string;
+  authenticationURL?: string;
+  authenticationTransactionId?: string;
+  requestPayload?: string;
+  maskedCardNumber?: string;
+  cardInfo: CardMetadata;
+  threedsVersion?: string;
+  failureReason?: string;
 }
 
 export function init(publicKey: string) {
@@ -33,7 +66,7 @@ export function createSingleUseToken(
   amount: number,
   shouldAuthenticate: boolean = true,
   onBehalfOf?: string
-): string {
+): Token {
   return XenditPayment.createSingleUseToken(
     card,
     amount,
@@ -46,15 +79,14 @@ export function createMultipleUseToken(
   card: Card,
   amount: number,
   onBehalfOf?: string
-): string {
+): Token {
   return XenditPayment.createMultipleUseToken(card, amount, onBehalfOf);
 }
 
 export function createAuthentication(
-  card: Card,
   tokenId: string,
   amount: number,
   onBehalfOf?: string
-): string {
-  return XenditPayment.createAuthentication(card, tokenId, amount, onBehalfOf);
+): Authentication {
+  return XenditPayment.createAuthentication(tokenId, amount, onBehalfOf);
 }

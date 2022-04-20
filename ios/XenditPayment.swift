@@ -19,8 +19,8 @@ class XenditPayment: NSObject {
      }
     
      @objc(createSingleUseToken:amount:shouldAuthenticate:onBehalfOf:withResolver:withRejecter:)
-     func createSingleUseToken(cardParams: NSDictionary, amount: NSNumber, shouldAuthenticate: Bool, onBehalfOf: String? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-         let cardData = createCard(params: cardParams)
+     func createSingleUseToken(cardParams: NSDictionary, amount: NSNumber, shouldAuthenticate: Bool, onBehalfOf: String? = nil, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+         let cardData = Mappers.mapToXenditCardData(cardData: cardParams)
          DispatchQueue.main.async {
              let rootViewController = UIApplication.shared.delegate?.window??.rootViewController ?? UIViewController()
              
@@ -34,14 +34,14 @@ class XenditPayment: NSObject {
                  }
 
                  // Handle successful tokenization. Token is of type XenditCCToken
-                 resolve(token?.id)
+                 resolve(Mappers.mapFromXenditCCToken(token))
              }
          }
      }
 
     @objc(createMultipleUseToken:amount:onBehalfOf:withResolver:withRejecter:)
-     func createMultipleUseToken(cardParams: NSDictionary, amount: NSNumber, onBehalfOf: String? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock ) {
-         let cardData = createCard(params: cardParams)
+     func createMultipleUseToken(cardParams: NSDictionary, amount: NSNumber, onBehalfOf: String? = nil, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+         let cardData = Mappers.mapToXenditCardData(cardData: cardParams)
          DispatchQueue.main.async {
              let rootViewController = UIApplication.shared.delegate?.window??.rootViewController ?? UIViewController()
          
@@ -55,43 +55,30 @@ class XenditPayment: NSObject {
                  }
 
                  // Handle successful tokenization. Token is of type XenditCCToken
-                 resolve(token?.id)
+                 resolve(Mappers.mapFromXenditCCToken(token))
              }
          }
      }
 
-    @objc(createAuthentication:tokenId:amount:onBehalfOf:withResolver:withRejecter:)
-     func createAuthentication(cardParams: NSDictionary, tokenId: String, amount: NSNumber, onBehalfOf: String? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock ) {
-         let cardData = createCard(params: cardParams)
+    @objc(createAuthentication:amount:onBehalfOf:withResolver:withRejecter:)
+     func createAuthentication(tokenId: String, amount: NSNumber, onBehalfOf: String? = nil, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock ) -> Void {
+//         let cardData = Mappers.mapToXenditCardData(cardData: cardParams)
          DispatchQueue.main.async {
              let rootViewController = UIApplication.shared.delegate?.window??.rootViewController ?? UIViewController()
          
              let authenticationRequest = XenditAuthenticationRequest.init(tokenId: tokenId, amount: amount, currency: XenditPayment.currency);
-             authenticationRequest.cardCvn = cardData.cardCvn;
+//             authenticationRequest.cardCvn = cardData.cardCvn;
              
              Xendit.createAuthentication(fromViewController: rootViewController, authenticationRequest: authenticationRequest, onBehalfOf: onBehalfOf) { (authentication, error) in
-                      if (error != nil) {
+                     if (error != nil) {
                           // Handle error. Error is of type XenditError
                           reject(error?.errorCode, error?.message, error as? Error)
                           return
                       }
 
-                      // Handle successful authentication
-                      resolve(authentication?.id)
+                      // Handle successful authentication. Authentication is of type XenditAuthentication
+                     resolve(Mappers.mapFromXenditAuthentication(authentication))
                   }
          }
-     }
-    
-    @objc
-    func createCard(params: NSDictionary) -> XenditCardData {
-         let creditCardNumber: String = params["creditCardNumber"] as! String
-         let cardExpirationMonth: String = params["cardExpirationMonth"] as! String
-         let cardExpirationYear: String = params["cardExpirationYear"] as! String
-         let creditCardCVN: String = params["creditCardCVN"] as! String
-        
-         let cardData = XenditCardData(cardNumber: creditCardNumber, cardExpMonth: cardExpirationMonth, cardExpYear: cardExpirationYear)
-         cardData.cardCvn = creditCardCVN
-         
-         return cardData
      }
 }

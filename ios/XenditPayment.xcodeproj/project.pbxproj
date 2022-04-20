@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F4FF95D7245B92E800C19C63 /* XenditPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* XenditPayment.swift */; };
+		FE318694280FE20A003D9018 /* Mappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE318693280FE20A003D9018 /* Mappers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		B3E7B5891CC2AC0600A0062D /* XenditPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XenditPayment.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* XenditPayment-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XenditPayment-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* XenditPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XenditPayment.swift; sourceTree = "<group>"; };
+		FE318693280FE20A003D9018 /* Mappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mappers.swift; sourceTree = "<group>"; };
 		FEDDEC122807CB3F009DD9D0 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +64,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				FE318693280FE20A003D9018 /* Mappers.swift */,
 				F4FF95D6245B92E800C19C63 /* XenditPayment.swift */,
 				B3E7B5891CC2AC0600A0062D /* XenditPayment.m */,
 				F4FF95D5245B92E700C19C63 /* XenditPayment-Bridging-Header.h */,
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE318694280FE20A003D9018 /* Mappers.swift in Sources */,
 				F4FF95D7245B92E800C19C63 /* XenditPayment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
