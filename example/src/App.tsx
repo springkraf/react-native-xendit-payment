@@ -29,9 +29,8 @@ export default function App() {
       const token = await createSingleUseToken(card, 200000);
       console.log('TOKEN', token);
       setResult(token.id);
-      console.log(card);
-    } catch (e) {
-      console.log('ERROR', e);
+    } catch (e: any) {
+      console.log('ERROR', e.message);
     }
   };
 
@@ -45,24 +44,18 @@ export default function App() {
       };
       const token = await createMultipleUseToken(card, 200000);
       setResult(token.id);
-      console.log(card);
-    } catch (e) {
-      console.log('ERROR', e);
+      console.log('TOKEN', token);
+    } catch (e: any) {
+      console.log('ERROR', e.message);
     }
   };
 
   const authenticate = async () => {
     try {
-      // const card = {
-      //   creditCardNumber: '4000000000000002',
-      //   cardExpirationMonth: '12',
-      //   cardExpirationYear: '2022',
-      //   creditCardCVN: '123',
-      // };
       const auth = await createAuthentication(result!.toString(), 200000);
       console.log('AUTH', auth);
-    } catch (e) {
-      console.log('ERROR', e);
+    } catch (e: any) {
+      console.log('ERROR', e.message);
     }
   };
 
