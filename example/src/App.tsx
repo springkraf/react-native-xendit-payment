@@ -20,10 +20,10 @@ export default function App() {
   const createSingleToken = async () => {
     try {
       const card = {
-        creditCardNumber: '4000000000000002',
+        creditCardNumber: '4000000000001091',
         // creditCardNumber: '4000000000000044',
         cardExpirationMonth: '12',
-        cardExpirationYear: '2022',
+        cardExpirationYear: '2024',
         creditCardCVN: '123',
       };
       const token = await createSingleUseToken(card, 200000);
@@ -37,9 +37,9 @@ export default function App() {
   const createMultipleToken = async () => {
     try {
       const card = {
-        creditCardNumber: '4000000000000002',
+        creditCardNumber: '4000000000001091',
         cardExpirationMonth: '12',
-        cardExpirationYear: '2022',
+        cardExpirationYear: '2024',
         creditCardCVN: '123',
       };
       const token = await createMultipleUseToken(card, 200000);
